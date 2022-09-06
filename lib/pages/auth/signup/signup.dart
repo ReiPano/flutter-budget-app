@@ -1,3 +1,4 @@
+import 'package:budget/pages/auth/custom_auth_app_bar.dart';
 import 'package:budget/pages/auth/login/login.dart';
 import 'package:budget/pages/auth/signup/component/email_field.dart';
 import 'package:budget/pages/auth/signup/component/password_field.dart';
@@ -59,63 +60,61 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark,
-        child: ListView(
-          children: [
-            ClipPath(
-              clipper: NiceClipper(),
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                color: Colors.indigo[400],
-                child: const Center(
-                  child: Text(
-                    'Create your account',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
-                  ),
+      appBar: const CustomAuthAppBar(),
+      body: ListView(
+        children: [
+          ClipPath(
+            clipper: NiceClipper(),
+            child: Container(
+              height: 200,
+              width: double.infinity,
+              color: Colors.indigo[700],
+              child: const Center(
+                child: Text(
+                  'Create your account',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            Form(
-              key: formKey,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                child: Center(
-                  child: Column(
-                    children: [
-                      UsernameField(
-                        handleUsernameChange: onUsernameChanged,
-                      ),
-                      EmailField(
-                        handleEmailChange: onEmailChanged,
-                      ),
-                      PasswordField(
-                        handlePasswordChange: onPasswordChanged,
-                        handleReWritePasswordChange: onReWritePasswordChanged,
-                      ),
-                      RoundedButtom(
-                          color: Colors.indigo, text: 'Sign up', press: signup),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushAndRemoveUntil(context,
-                                MaterialPageRoute(
-                              builder: (context) {
-                                return const Login();
-                              },
-                            ), (route) => false);
-                          },
-                          child: const Text('Alredy have an account? Log in!')),
-                    ],
-                  ),
+          ),
+          Form(
+            key: formKey,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              child: Center(
+                child: Column(
+                  children: [
+                    UsernameField(
+                      handleUsernameChange: onUsernameChanged,
+                    ),
+                    EmailField(
+                      handleEmailChange: onEmailChanged,
+                    ),
+                    PasswordField(
+                      handlePasswordChange: onPasswordChanged,
+                      handleReWritePasswordChange: onReWritePasswordChanged,
+                    ),
+                    RoundedButtom(
+                        color: Colors.indigo, text: 'Sign up', press: signup),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(
+                            builder: (context) {
+                              return const Login();
+                            },
+                          ), (route) => false);
+                        },
+                        child: const Text('Alredy have an account? Log in!')),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
