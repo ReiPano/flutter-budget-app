@@ -28,14 +28,14 @@ class _BudgetAppState extends State<BudgetApp> {
   initAppState() async {
     String? jwtToken = await getJWTAuthToken();
     if (jwtToken != null) {
-      bool isValid = await verifyJWTToken(token);
+      bool isValid = await verifyJWTToken(jwtToken);
       if (!isValid) {
         removeJWTAuthToken();
       }
     }
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        token = jwtToken;
+        token = jwtToken ?? '123131';
         loading = false;
       });
     });

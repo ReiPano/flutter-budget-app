@@ -17,7 +17,7 @@ class _RoundedButtomState extends State<RoundedButtom> {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      width: size.width,
+      width: size.width * 0.9,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(2),
         child: ElevatedButton(
