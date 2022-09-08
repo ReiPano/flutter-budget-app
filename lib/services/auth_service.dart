@@ -27,11 +27,11 @@ Future<bool> verifyJWTToken(token) async {
 Future<bool> loginWithUsernameAndPassword(String username, String password) {
   // TDOD: Implement real login
   setJWTAuthToken('1234');
-  return Future.delayed(const Duration(seconds: 1), () => true);
+  return Future.delayed(const Duration(seconds: 1), () => false);
 }
 
 Future<bool> registerNewUser(User user) {
   // TDOD: Implement real signup
   setJWTAuthToken('1234');
-  return Future.delayed(const Duration(seconds: 1), () => true);
+  return Future.delayed(const Duration(seconds: 1), () => false);
 }

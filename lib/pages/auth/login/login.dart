@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:budget/constants/theme.dart';
 import 'package:budget/pages/app/app_container.dart';
 import 'package:budget/pages/auth/custom_auth_app_bar.dart';
 import 'package:budget/pages/auth/signup/signup.dart';
 import 'package:budget/services/auth_service.dart';
+import 'package:budget/services/common_service.dart';
 import 'package:budget/shared/rounded_button.dart';
 import 'package:flutter/material.dart';
 import '../../../shared/nice_clipper.dart';
@@ -18,6 +17,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final usernameController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>?
+      _scaffoldFeatureController;
   bool usernameError = false;
   bool passwordError = false;
 
@@ -46,12 +47,22 @@ class _LoginState extends State<Login> {
     if (!usernameError && !passwordError) {
       // Call the login funtion
       bool success = await loginWithUsernameAndPassword(username, password);
-      success
-          ? goToApp()
-          : () {
-              log('Cannot login');
-            };
+      success ? goToApp() : showSnackBar();
     }
+  }
+
+  void showSnackBar() {
+    var action = SnackBarAction(
+      label: 'Ok',
+      textColor: AppTheme.primaryColorShade,
+      onPressed: () {
+        _scaffoldFeatureController?.close();
+      },
+    );
+
+    _scaffoldFeatureController = openSnackBar(
+        ScaffoldMessenger.of(context), 'User could not be loged in!',
+        snackBarAction: action);
   }
 
   resetUsernameValidation(value) {

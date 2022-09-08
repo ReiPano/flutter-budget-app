@@ -6,6 +6,7 @@ import 'package:budget/pages/auth/signup/component/email_field.dart';
 import 'package:budget/pages/auth/signup/component/password_field.dart';
 import 'package:budget/pages/auth/signup/component/username_field.dart';
 import 'package:budget/services/auth_service.dart';
+import 'package:budget/services/common_service.dart';
 import 'package:budget/shared/rounded_button.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,8 @@ class _SignupState extends State<Signup> {
   String _email = '';
   String _password = '';
   String _reWritePassword = '';
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>?
+      _scaffoldFeatureController;
   final formKey = GlobalKey<FormState>();
 
   void onUsernameChanged(String? username) {
@@ -64,9 +67,24 @@ class _SignupState extends State<Signup> {
       bool success = await registerNewUser(user);
       if (success) {
         goToApp();
+      } else {
+        showSnackBar();
       }
-      //Sign up
     }
+  }
+
+  void showSnackBar() {
+    var action = SnackBarAction(
+      label: 'Ok',
+      textColor: AppTheme.primaryColorShade,
+      onPressed: () {
+        _scaffoldFeatureController?.close();
+      },
+    );
+
+    _scaffoldFeatureController = openSnackBar(
+        ScaffoldMessenger.of(context), 'User could not be registered',
+        snackBarAction: action);
   }
 
   isFormValid() {
