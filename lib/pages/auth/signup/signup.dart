@@ -1,4 +1,5 @@
 import 'package:budget/constants/theme.dart';
+import 'package:budget/models/user.dart';
 import 'package:budget/pages/auth/custom_auth_app_bar.dart';
 import 'package:budget/pages/auth/login/login.dart';
 import 'package:budget/pages/auth/signup/component/email_field.dart';
@@ -59,8 +60,11 @@ class _SignupState extends State<Signup> {
 
   signup() async {
     if (isFormValid()) {
-      await registerNewUser();
-      goToApp();
+      User user = User(_username, _email, _password, _reWritePassword);
+      bool success = await registerNewUser(user);
+      if (success) {
+        goToApp();
+      }
       //Sign up
     }
   }

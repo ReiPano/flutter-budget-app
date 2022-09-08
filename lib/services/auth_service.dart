@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:budget/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const tokenKey = 'TOKEN_KEY';
@@ -29,7 +30,7 @@ Future<bool> loginWithUsernameAndPassword(String username, String password) {
   return Future.delayed(const Duration(seconds: 1), () => true);
 }
 
-Future<bool> registerNewUser() {
+Future<bool> registerNewUser(User user) {
   // TDOD: Implement real signup
   setJWTAuthToken('1234');
   return Future.delayed(const Duration(seconds: 1), () => true);
