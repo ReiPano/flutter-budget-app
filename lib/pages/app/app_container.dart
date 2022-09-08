@@ -1,3 +1,5 @@
+import 'package:budget/constants/theme.dart';
+import 'package:budget/pages/app/drawer/drawer.dart';
 import 'package:budget/pages/home/home.dart';
 import 'package:budget/pages/receipt/receipt.dart';
 import 'package:budget/pages/report/report.dart';
@@ -14,7 +16,7 @@ class AppContainer extends StatefulWidget {
 class _AppContainerState extends State<AppContainer> {
   int _selectedIndex = 0;
   static final List<Widget> _pages = <Widget>[
-    HomePage(),
+    const HomePage(),
     const Receip(),
     const Report(),
   ];
@@ -34,6 +36,7 @@ class _AppContainerState extends State<AppContainer> {
       body: Container(
         child: _pages.elementAt(_selectedIndex),
       ),
+      drawer: const AppCustomDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -41,16 +44,16 @@ class _AppContainerState extends State<AppContainer> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.wallet),
+            label: 'Budget',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.pie_chart),
+            label: 'Report',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.indigoAccent[800],
+        selectedItemColor: AppTheme.bottomNavSelectedColor,
         enableFeedback: true,
         onTap: _onItemTapped,
       ),

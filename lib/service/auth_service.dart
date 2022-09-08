@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const tokenKey = 'TOKEN_KEY';
 
-setJWTAuthToken(String token) async {
+void setJWTAuthToken(String token) async {
   const storage = FlutterSecureStorage();
   await storage.write(key: tokenKey, value: token);
 }
@@ -13,14 +13,24 @@ Future<String?> getJWTAuthToken() async {
   return await storage.read(key: tokenKey);
 }
 
-removeJWTAuthToken() async {
+void removeJWTAuthToken() async {
   const storage = FlutterSecureStorage();
   await storage.delete(key: tokenKey);
 }
 
 Future<bool> verifyJWTToken(token) async {
   //TODO: Implement auth
-  return await Future.delayed(
-          const Duration(seconds: 3), (() => token != '')) ||
-      true;
+  return await Future.delayed(const Duration(seconds: 3), (() => token != ''));
+}
+
+Future<bool> loginWithUsernameAndPassword(String username, String password) {
+  // TDOD: Implement real login
+  setJWTAuthToken('1234');
+  return Future.delayed(const Duration(seconds: 1), () => true);
+}
+
+Future<bool> registerNewUser() {
+  // TDOD: Implement real signup
+  setJWTAuthToken('1234');
+  return Future.delayed(const Duration(seconds: 1), () => true);
 }

@@ -1,13 +1,16 @@
+import 'dart:developer';
+
+import 'package:budget/constants/theme.dart';
+import 'package:budget/pages/app/app_container.dart';
 import 'package:budget/pages/auth/custom_auth_app_bar.dart';
 import 'package:budget/pages/auth/signup/signup.dart';
+import 'package:budget/service/auth_service.dart';
 import 'package:budget/shared/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../../shared/nice_clipper.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
-
   @override
   State<Login> createState() => _LoginState();
 }
@@ -18,7 +21,15 @@ class _LoginState extends State<Login> {
   bool usernameError = false;
   bool passwordError = false;
 
-  login() {
+  void goToApp() {
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+      builder: ((context) {
+        return const AppContainer(title: 'Budget');
+      }),
+    ), (route) => false);
+  }
+
+  login() async {
     String username = usernameController.text;
     String password = usernameController.text;
     if (username.isEmpty) {
@@ -34,6 +45,12 @@ class _LoginState extends State<Login> {
 
     if (!usernameError && !passwordError) {
       // Call the login funtion
+      bool success = await loginWithUsernameAndPassword(username, password);
+      success
+          ? goToApp()
+          : () {
+              log('Cannot login');
+            };
     }
   }
 
@@ -67,7 +84,7 @@ class _LoginState extends State<Login> {
             child: Container(
               height: 200,
               width: double.infinity,
-              color: Colors.indigo[700],
+              color: AppTheme.statusBarColor,
               child: const Center(
                 child: Text(
                   'Log in to your account',
@@ -113,7 +130,9 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   RoundedButtom(
-                      color: Colors.indigo, text: 'Log in', press: login),
+                      color: AppTheme.primaryButtonColor,
+                      text: 'Log in',
+                      press: login),
                   TextButton(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(

@@ -1,6 +1,6 @@
+import 'package:budget/constants/theme.dart';
 import 'package:budget/pages/auth/login/login.dart';
 import 'package:budget/pages/auth/signup/signup.dart';
-import 'package:budget/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../shared/rounded_button.dart';
@@ -13,7 +13,7 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
-  var color = Colors.indigo[300];
+  var color = AppTheme.primaryColorShade;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _WelcomeState extends State<Welcome> {
               height: 400,
             ),
             RoundedButtom(
-                color: Colors.indigo,
+                color: AppTheme.primaryColor,
                 text: 'Login',
                 press: () {
                   Navigator.pushAndRemoveUntil(context,
@@ -45,7 +45,7 @@ class _WelcomeState extends State<Welcome> {
                   }), (route) => false);
                 }),
             RoundedButtom(
-                color: color as Color,
+                color: color,
                 text: 'Sign up',
                 press: () {
                   Navigator.pushAndRemoveUntil(context,

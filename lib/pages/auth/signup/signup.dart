@@ -1,13 +1,15 @@
+import 'package:budget/constants/theme.dart';
 import 'package:budget/pages/auth/custom_auth_app_bar.dart';
 import 'package:budget/pages/auth/login/login.dart';
 import 'package:budget/pages/auth/signup/component/email_field.dart';
 import 'package:budget/pages/auth/signup/component/password_field.dart';
 import 'package:budget/pages/auth/signup/component/username_field.dart';
+import 'package:budget/service/auth_service.dart';
 import 'package:budget/shared/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../shared/nice_clipper.dart';
+import '../../app/app_container.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -47,8 +49,18 @@ class _SignupState extends State<Signup> {
     });
   }
 
-  signup() {
+  void goToApp() {
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+      builder: ((context) {
+        return const AppContainer(title: 'Budget');
+      }),
+    ), (route) => false);
+  }
+
+  signup() async {
     if (isFormValid()) {
+      await registerNewUser();
+      goToApp();
       //Sign up
     }
   }
@@ -68,7 +80,7 @@ class _SignupState extends State<Signup> {
             child: Container(
               height: 200,
               width: double.infinity,
-              color: Colors.indigo[700],
+              color: AppTheme.statusBarColor,
               child: const Center(
                 child: Text(
                   'Create your account',
@@ -98,7 +110,9 @@ class _SignupState extends State<Signup> {
                       handleReWritePasswordChange: onReWritePasswordChanged,
                     ),
                     RoundedButtom(
-                        color: Colors.indigo, text: 'Sign up', press: signup),
+                        color: AppTheme.primaryButtonColor,
+                        text: 'Sign up',
+                        press: signup),
                     TextButton(
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(context,

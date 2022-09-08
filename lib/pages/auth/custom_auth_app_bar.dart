@@ -1,3 +1,4 @@
+import 'package:budget/constants/theme.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class CustomAuthAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: Colors.indigo[700],
+      backgroundColor: AppTheme.statusBarColor,
       toolbarHeight: 0,
       systemOverlayStyle: SystemUiOverlayStyle.light,
     );

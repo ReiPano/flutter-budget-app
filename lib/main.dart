@@ -1,3 +1,4 @@
+import 'package:budget/constants/theme.dart';
 import 'package:budget/pages/app/app_container.dart';
 import 'package:budget/pages/welcome/welcome.dart';
 import 'package:budget/service/auth_service.dart';
@@ -22,6 +23,7 @@ class _BudgetAppState extends State<BudgetApp> {
   @override
   void initState() {
     super.initState();
+    removeJWTAuthToken();
     initAppState();
   }
 
@@ -35,7 +37,7 @@ class _BudgetAppState extends State<BudgetApp> {
     }
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        token = jwtToken ?? '123131';
+        token = jwtToken;
         loading = false;
       });
     });
@@ -64,7 +66,7 @@ class _BudgetAppState extends State<BudgetApp> {
       debugShowCheckedModeBanner: false,
       title: 'Budget',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: AppTheme.primaryButtonColor,
       ),
       home: getHomeComponent(),
       // home: const AppContainer(title: 'Budget'),
