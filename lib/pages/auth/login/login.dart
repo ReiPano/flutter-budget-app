@@ -4,7 +4,7 @@ import 'package:budget/constants/theme.dart';
 import 'package:budget/pages/app/app_container.dart';
 import 'package:budget/pages/auth/custom_auth_app_bar.dart';
 import 'package:budget/pages/auth/signup/signup.dart';
-import 'package:budget/service/auth_service.dart';
+import 'package:budget/services/auth_service.dart';
 import 'package:budget/shared/rounded_button.dart';
 import 'package:flutter/material.dart';
 import '../../../shared/nice_clipper.dart';

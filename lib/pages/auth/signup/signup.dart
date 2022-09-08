@@ -4,7 +4,7 @@ import 'package:budget/pages/auth/login/login.dart';
 import 'package:budget/pages/auth/signup/component/email_field.dart';
 import 'package:budget/pages/auth/signup/component/password_field.dart';
 import 'package:budget/pages/auth/signup/component/username_field.dart';
-import 'package:budget/service/auth_service.dart';
+import 'package:budget/services/auth_service.dart';
 import 'package:budget/shared/rounded_button.dart';
 import 'package:flutter/material.dart';
 

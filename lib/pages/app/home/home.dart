@@ -11,10 +11,12 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        HomeHeader(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: const [
+          HomeHeader(),
+        ],
+      ),
     );
   }
 }

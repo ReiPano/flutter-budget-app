@@ -1,7 +1,7 @@
 import 'package:budget/constants/theme.dart';
 import 'package:budget/pages/app/app_container.dart';
 import 'package:budget/pages/welcome/welcome.dart';
-import 'package:budget/service/auth_service.dart';
+import 'package:budget/services/auth_service.dart';
 import 'package:budget/shared/loader.dart';
 import 'package:flutter/material.dart';
 
