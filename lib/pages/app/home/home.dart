@@ -1,4 +1,4 @@
-import 'package:budget/pages/home/component/home_header.dart';
+import './component/home_header.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

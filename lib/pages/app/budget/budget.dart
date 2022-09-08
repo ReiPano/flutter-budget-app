@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class Receip extends StatefulWidget {
-  const Receip({Key? key}) : super(key: key);
+class Budget extends StatefulWidget {
+  const Budget({Key? key}) : super(key: key);
 
   @override
-  State<Receip> createState() => _ReceipState();
+  State<Budget> createState() => _BudgetState();
 }
 
-class _ReceipState extends State<Receip> {
+class _BudgetState extends State<Budget> {
   @override
   Widget build(BuildContext context) {
     return Text("Receip");

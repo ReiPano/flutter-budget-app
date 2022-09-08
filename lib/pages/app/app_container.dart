@@ -1,9 +1,10 @@
 import 'package:budget/constants/theme.dart';
 import 'package:budget/pages/app/drawer/drawer.dart';
-import 'package:budget/pages/home/home.dart';
-import 'package:budget/pages/receipt/receipt.dart';
-import 'package:budget/pages/report/report.dart';
+import 'package:budget/pages/app/budget/budget.dart';
+import 'package:budget/pages/app/report/report.dart';
 import 'package:flutter/material.dart';
+
+import 'home/home.dart';
 
 class AppContainer extends StatefulWidget {
   const AppContainer({Key? key, required this.title}) : super(key: key);
@@ -17,7 +18,7 @@ class _AppContainerState extends State<AppContainer> {
   int _selectedIndex = 0;
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
-    const Receip(),
+    const Budget(),
     const Report(),
   ];
 
