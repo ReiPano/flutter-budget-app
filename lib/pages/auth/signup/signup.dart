@@ -25,6 +25,7 @@ class _SignupState extends State<Signup> {
   String _email = '';
   String _password = '';
   String _reWritePassword = '';
+  bool loading = false;
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason>?
       _scaffoldFeatureController;
   final formKey = GlobalKey<FormState>();
@@ -63,6 +64,9 @@ class _SignupState extends State<Signup> {
 
   signup() async {
     if (isFormValid()) {
+      setState(() {
+        loading = true;
+      });
       User user = User(_username, _email, _password, _reWritePassword);
       bool success = await registerNewUser(user);
       if (success) {
@@ -70,21 +74,17 @@ class _SignupState extends State<Signup> {
       } else {
         showSnackBar();
       }
+      setState(() {
+        loading = false;
+      });
     }
   }
 
   void showSnackBar() {
-    var action = SnackBarAction(
-      label: 'Ok',
-      textColor: AppTheme.primaryColorShade,
-      onPressed: () {
-        _scaffoldFeatureController?.close();
-      },
-    );
-
     _scaffoldFeatureController = openSnackBar(
-        ScaffoldMessenger.of(context), 'User could not be registered',
-        snackBarAction: action);
+      ScaffoldMessenger.of(context),
+      'User could not be registered',
+    );
   }
 
   isFormValid() {
@@ -132,9 +132,12 @@ class _SignupState extends State<Signup> {
                       handleReWritePasswordChange: onReWritePasswordChanged,
                     ),
                     RoundedButtom(
-                        color: AppTheme.primaryButtonColor,
-                        text: 'Sign up',
-                        press: signup),
+                      color: AppTheme.primaryButtonColor,
+                      textColor: AppTheme.textColor,
+                      text: 'Sign up',
+                      press: signup,
+                      loading: loading,
+                    ),
                     TextButton(
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(context,

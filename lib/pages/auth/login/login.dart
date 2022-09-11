@@ -21,6 +21,7 @@ class _LoginState extends State<Login> {
       _scaffoldFeatureController;
   bool usernameError = false;
   bool passwordError = false;
+  bool loading = false;
 
   void goToApp() {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
@@ -31,6 +32,9 @@ class _LoginState extends State<Login> {
   }
 
   login() async {
+    setState(() {
+      loading = true;
+    });
     String username = usernameController.text;
     String password = usernameController.text;
     if (username.isEmpty) {
@@ -49,20 +53,17 @@ class _LoginState extends State<Login> {
       bool success = await loginWithUsernameAndPassword(username, password);
       success ? goToApp() : showSnackBar();
     }
+
+    setState(() {
+      loading = false;
+    });
   }
 
   void showSnackBar() {
-    var action = SnackBarAction(
-      label: 'Ok',
-      textColor: AppTheme.primaryColorShade,
-      onPressed: () {
-        _scaffoldFeatureController?.close();
-      },
-    );
-
     _scaffoldFeatureController = openSnackBar(
-        ScaffoldMessenger.of(context), 'User could not be loged in!',
-        snackBarAction: action);
+      ScaffoldMessenger.of(context),
+      'User could not be loged in!',
+    );
   }
 
   resetUsernameValidation(value) {
@@ -141,9 +142,12 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   RoundedButtom(
-                      color: AppTheme.primaryButtonColor,
-                      text: 'Log in',
-                      press: login),
+                    color: AppTheme.primaryButtonColor,
+                    textColor: AppTheme.textColor,
+                    text: 'Log in',
+                    press: login,
+                    loading: loading,
+                  ),
                   TextButton(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(

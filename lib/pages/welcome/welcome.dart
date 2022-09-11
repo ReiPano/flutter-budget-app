@@ -37,6 +37,7 @@ class _WelcomeState extends State<Welcome> {
             ),
             RoundedButtom(
                 color: AppTheme.primaryColor,
+                textColor: AppTheme.textColor,
                 text: 'Login',
                 press: () {
                   Navigator.pushAndRemoveUntil(context,
@@ -46,6 +47,7 @@ class _WelcomeState extends State<Welcome> {
                 }),
             RoundedButtom(
                 color: color,
+                textColor: AppTheme.textColor,
                 text: 'Sign up',
                 press: () {
                   Navigator.pushAndRemoveUntil(context,
